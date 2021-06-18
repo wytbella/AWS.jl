@@ -123,7 +123,7 @@ end
             response = AWS.submit_request(aws, request)
 
             @test response.headers == Patches.headers
-            @test response isa Vector
+            @test response.headers isa Vector
         end
     end
 

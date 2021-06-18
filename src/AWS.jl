@@ -1,7 +1,8 @@
 module AWS
 
-using Compat: Compat, @something
+using Base: BufferStream
 using Base64
+using Compat: Compat, @something
 using Dates
 using HTTP
 using MbedTLS

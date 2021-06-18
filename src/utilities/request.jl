@@ -93,7 +93,7 @@ function _http_request(request::Request)
     @repeat 4 try
         http_stack = HTTP.stack(redirect=false, retry=false, aws_authorization=false)
 
-        response_stream = Base.BufferStream()
+        response_stream = BufferStream()
 
         r = HTTP.request(
             http_stack,

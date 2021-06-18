@@ -5,8 +5,8 @@ struct Response
 end
 
 function Base.getproperty(r::Response, f::Symbol)
-    if f === :headers
-        r.response.headers
+    if f === :headers || f === :status
+        getfield(r.response, f)
     else
         getfield(r, f)
     end
@@ -42,7 +42,7 @@ Base.parse(::Type{T}, r::Response) where T = parse(T, r, mime_type(r))
 function Base.parse(::Type{T}, r::Response, ::MIME"application/xml") where T <: AbstractDict
     xml = parse_xml(String(r.body))
     root = XMLDict.root(xml.x)  # TODO: Why x?
-    return xml_dict(root, T))
+    return xml_dict(root, T)
 end
 
 function Base.parse(::Type{T}, r::Response, ::MIME"application/json") where T <: AbstractDict
